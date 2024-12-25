@@ -11,7 +11,6 @@ import SignIn from './components/pages/Signin';
 
 function App() {
   return (
-    <React.StrictMode>
       <Router>
         <Header />
         <Routes>
@@ -20,7 +19,6 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
         </Routes>
       </Router>
-    </React.StrictMode>
   );
 }
 
