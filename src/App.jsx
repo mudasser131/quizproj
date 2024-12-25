@@ -12,7 +12,6 @@ import Error404 from './components/pages/Error404';
 
 function App() {
   return (
-    <React.StrictMode>
       <Router>
         <Header />
         <Routes>
@@ -23,7 +22,6 @@ function App() {
 
         </Routes>
       </Router>
-    </React.StrictMode>
   );
 }
 
