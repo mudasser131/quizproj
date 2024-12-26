@@ -1,19 +1,31 @@
-import React from "react";
-import { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 const SignUp = () => {
+  const location = useLocation();
+
+  // State for form data
   const [formData, setFormData] = useState({
     user_id: 5,
     username: "",
     email: "",
     password: "",
     school_id: 1,
-    role: "teacher",
+    role: "teacher", // Default role
   });
 
   const [message, setMessage] = useState(""); // To display success or error messages
+
+  // Update role based on query parameters
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const roleFromQuery = queryParams.get("role") || "teacher";
+    setFormData((prevData) => ({
+      ...prevData,
+      role: roleFromQuery,
+    }));
+  }, [location.search]); // Re-run when location.search changes
 
   const handleChange = (e) => {
     setFormData({
@@ -29,9 +41,7 @@ const SignUp = () => {
         "http://localhost:4020/user/create",
         formData
       );
-      console.log(formData);
       console.log("Response from Backend:", response.data); // Log the backend response
-
       setMessage("Sign up successful!");
     } catch (error) {
       setMessage(error.response?.data?.message || "An error occurred");
@@ -41,10 +51,12 @@ const SignUp = () => {
   return (
     <div className="h-screen flex items-center justify-center bg-gray-100">
       <form
-        className="bg-white p-8 rounded shadow-md w-80"
+        className="bg-white p-8 rounded-md shadow-md w-80"
         onSubmit={handleSubmit}
       >
-        <h2 className="text-2xl font-bold mb-4 text-center">Sign Up </h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">
+          Sign Up as {formData.role.charAt(0).toUpperCase() + formData.role.slice(1)}
+        </h2>
         <input
           type="text"
           name="username"
