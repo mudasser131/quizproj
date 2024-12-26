@@ -44,7 +44,7 @@ const SignUp = () => {
         className="bg-white p-8 rounded shadow-md w-80"
         onSubmit={handleSubmit}
       >
-        <h2 className="text-2xl font-bold mb-4 text-center">Sign Up</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">Sign Up </h2>
         <input
           type="text"
           name="username"
